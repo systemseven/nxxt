@@ -1,4 +1,4 @@
-<x-layouts.auth.split title="Login to NxxT powered by Loving">
+<x-layouts.auth.split title="NxxT Sign In">
     <div class="flex flex-col gap-6">
         <div class="flex justify-center">
             <img src="{{asset('/img/nxxt_logo_web.png')}}" alt="NxxT Logo" class="h-10"/>
