@@ -1,4 +1,4 @@
-<x-layouts.auth.card>
+<x-layouts.auth.card title="Reset Your Password">
     <div class="flex flex-col gap-6">
         <x-auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
 

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Casts\TimezoneCast;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +49,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'created_at' => TimezoneCast::class,
+            'updated_at' => TimezoneCast::class,
+            'last_login_at' => TimezoneCast::class,
         ];
     }
 
@@ -60,5 +65,12 @@ class User extends Authenticatable
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => sprintf('%s %s', $this->first_name, $this->last_name),
+        );
     }
 }
