@@ -7,7 +7,7 @@
         <div class="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <div class="flex w-full max-w-md flex-col gap-6">
                 <a href="{{ route('home') }}" class="flex flex-col items-center gap-2 font-medium" wire:navigate>
-                    <div class="bg-white p-2 border shadow-xl -mb-12 z-20">
+                    <div class="bg-white p-2 border shadow-lg -mb-12 z-20">
                         <span class="flex h-16 w-16 items-center justify-center rounded-md">
                             <x-app-logo-icon  />
                         </span>
