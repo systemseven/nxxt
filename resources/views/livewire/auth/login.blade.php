@@ -1,5 +1,8 @@
-<x-layouts.auth>
+<x-layouts.auth.split>
     <div class="flex flex-col gap-6">
+        <div class="flex justify-center">
+            <img src="{{asset('/img/nxxt_logo_web.png')}}" alt="NxxT Logo" class="h-10"/>
+        </div>
         <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
 
         <!-- Session Status -->
@@ -55,4 +58,4 @@
             </div>
         @endif
     </div>
-</x-layouts.auth>
+</x-layouts.auth.split>
