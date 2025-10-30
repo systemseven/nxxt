@@ -61,6 +61,14 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
+.standard-vert-spacing{
+    @apply space-y-8;
+}
+
+.standard-form-spacing{
+    @apply space-y-12 divide-y;
+}
+
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */

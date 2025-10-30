@@ -1,4 +1,4 @@
-@props(['heading', 'subheading', 'action', 'url'])
+@props(['heading', 'subheading', 'action', 'url', 'action_variant' => 'primary'])
 <section>
     <div class="flex items-center justify-between">
         <div>
@@ -9,7 +9,7 @@
         </div>
         <div>
             @if(isset($action) && isset($url))
-                <flux:button variant="primary" href="{{ $url }}" wire:navigate>{{ $action }}</flux:button>
+                <flux:button variant="{{$action_variant}}" href="{{ $url }}" wire:navigate>{{ $action }}</flux:button>
             @endif
         </div>
     </div>

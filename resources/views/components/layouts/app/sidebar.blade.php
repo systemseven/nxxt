@@ -8,7 +8,7 @@
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="me-5 flex justify-center items-center space-x-2 rtl:space-x-reverse" wire:navigate>
-                <x-app-logo class="w-24"/>
+                <x-app-logo class="w-18"/>
             </a>
 
             <flux:separator variant="subtle"/>

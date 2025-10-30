@@ -3,6 +3,8 @@
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Livewire\Users\CreateUserForm;
+use App\Livewire\Users\UserCreate;
 use App\Livewire\Users\UserList;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     //    Route::get('settings/appearance', Appearance::class)->name('appearance.edit');
 
     Route::get('users', UserList::class)->name('users.index');
+    Route::get('users/create', UserCreate::class)->name('users.create');
 
 });
 
