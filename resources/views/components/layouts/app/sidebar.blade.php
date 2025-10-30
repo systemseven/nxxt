@@ -4,10 +4,10 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable collapsible class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+        <flux:sidebar sticky stashable collapsible class="border-e border-zinc-200 bg-zinc-50  dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="me-5 flex justify-center items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+            <a href="{{ route('dashboard') }}" class="me-5 flex justify-center items-center space-x-2 rtl:space-x-reverse mt-2" wire:navigate>
                 <x-app-logo class="w-18"/>
             </a>
 
@@ -21,9 +21,8 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Application Settings')" class="grid">
-                    <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users*')" wire:navigate>
-                        {{ __('Users') }}
-                    </flux:navlist.item>
+                    <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users*')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user-lock" :href="route('roles.index')" :current="request()->routeIs('roles*')" wire:navigate>{{ __('User Roles') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -78,9 +77,11 @@
         </flux:sidebar>
 
         <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
-            <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+        <flux:header class="lg:hidden bg-black">
+            <flux:sidebar.toggle class="lg:hidden !text-white" icon="bars-2" inset="left" />
 
+            <flux:spacer />
+            <img src="{{asset('/img/nxxt_icon_square.png')}}" alt="NxxT Mobile Icon" class="w-12"/>
             <flux:spacer />
 
             <flux:dropdown position="top" align="end">
@@ -130,5 +131,8 @@
         {{ $slot }}
 
         @fluxScripts
+        @persist('toast')
+            <flux:toast position="top end"/>
+        @endpersist
     </body>
 </html>

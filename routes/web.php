@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Roles\RoleCreate;
+use App\Livewire\Roles\RoleList;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -19,8 +21,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('user-password.edit');
     //    Route::get('settings/appearance', Appearance::class)->name('appearance.edit');
 
-    Route::get('users', UserList::class)->name('users.index');
-    Route::get('users/create', UserCreate::class)->name('users.create');
+    Route::prefix('settings')->group(function () {
+        Route::get('users', UserList::class)->name('users.index');
+        Route::get('users/create', UserCreate::class)->name('users.create');
+
+        Route::get('roles', RoleList::class)->name('roles.index');
+        Route::get('roles/create', RoleCreate::class)->name('roles.create');
+    });
 
 });
 

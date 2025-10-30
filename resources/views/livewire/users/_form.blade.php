@@ -22,5 +22,7 @@
         </flux:select>
     </x-form-section>
 
-    <flux:button type="submit" variant="primary">{{$btn_label}}</flux:button>
+    <x-form-section>
+        <flux:button type="submit" variant="primary">{{$btn_label}}</flux:button>
+    </x-form-section>
 </div>

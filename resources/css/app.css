@@ -69,6 +69,10 @@ select:focus[data-flux-control] {
     @apply space-y-12 divide-y;
 }
 
+.standard-form-width{
+    @apply max-w-6xl;
+}
+
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */

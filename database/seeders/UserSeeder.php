@@ -18,6 +18,6 @@ class UserSeeder extends Seeder
             'first_name' => 'Justin',
             'last_name' => 'Test',
             'email' => 'systemsevendesigns@gmail.com',
-        ]);
+        ])->assignRole('super_admin');
     }
 }
