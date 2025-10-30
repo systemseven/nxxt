@@ -6,7 +6,4 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Title('Manage Users')]
-class UserList extends Component
-{
-
-}
+class UserList extends Component {}
