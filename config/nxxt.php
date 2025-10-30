@@ -18,7 +18,7 @@ return [
         ['name' => 'field_manager', 'permissions' => []],
         ['name' => 'crew_leader', 'permissions' => []],
         ['name' => 'accounting', 'permissions' => ['reports:*']],
-        ['name' => 'help_desk_&_scheduling_management', 'permissions' => ['scheduling*', 'builders*', 'communities*']],
+        ['name' => 'help_desk_&_scheduling_management', 'permissions' => ['scheduling:*', 'builders:*', 'communities:*']],
         ['name' => 'upper_management', 'permissions' => ['reports:*']],
     ],
 ];

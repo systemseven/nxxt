@@ -7,18 +7,18 @@
     />
 
     @unless($this->roles->isEmpty())
-        <flux:table>
+        <flux:table class="border">
             <flux:table.rows>
                 <flux:table.columns>
-                    <flux:table.column>Role Name</flux:table.column>
+                    <flux:table.column class="!pl-2">Role Name</flux:table.column>
                     <flux:table.column>Permissions on Role</flux:table.column>
                     <flux:table.column>Users with Role</flux:table.column>
                     <flux:table.column>Last Updated</flux:table.column>
                     <flux:table.column>Actions</flux:table.column>
                 </flux:table.columns>
                 @foreach($this->roles as $r)
-                    <flux:table.row>
-                        <flux:table.cell>{{$r->name}}</flux:table.cell>
+                    <flux:table.row class="even:bg-slate-50">
+                        <flux:table.cell class="!pl-2">{{str($r->name)->headline()}}</flux:table.cell>
                         <flux:table.cell>{{$r->permissions_count}}</flux:table.cell>
                         <flux:table.cell>{{$r->users_count}}</flux:table.cell>
                         <flux:table.cell>
