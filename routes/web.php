@@ -3,7 +3,6 @@
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
-use App\Livewire\Users\CreateUserForm;
 use App\Livewire\Users\UserCreate;
 use App\Livewire\Users\UserList;
 use Illuminate\Support\Facades\Route;

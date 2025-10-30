@@ -1,4 +1,5 @@
 <?php
+
 return [
     'permissions' => [
         ['key' => 'builders', 'set' => ['view', 'create', 'edit', 'delete']],

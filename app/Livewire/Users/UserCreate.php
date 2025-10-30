@@ -17,5 +17,4 @@ class UserCreate extends Component
 
         dd($this->form);
     }
-
 }
