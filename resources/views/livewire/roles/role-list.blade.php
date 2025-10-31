@@ -14,7 +14,7 @@
                     <flux:table.column align="center">Permissions on Role</flux:table.column>
                     <flux:table.column align="center">Users with Role</flux:table.column>
                     <flux:table.column>Last Updated</flux:table.column>
-                    <flux:table.column>Actions</flux:table.column>
+                    <flux:table.column></flux:table.column>
                 </flux:table.columns>
                 @foreach($this->roles as $r)
                     <flux:table.row>
@@ -31,7 +31,28 @@
                                 : $r->updated_at->timezone('America/New_York')->diffForHumans() }}
                         </flux:table.cell>
                         <flux:table.cell>
-                            ...
+                            <div class="flex justify-end space-x-3">
+                                @canOrSuper('edit:user_roles')
+                                    <flux:button size="xs" variant="ghost" icon="pencil-square" :href="route('roles.edit', $r)" />
+                                @endcanOrSuper
+                                @canOrSuper('delete:user_roles')
+                                    <flux:modal.trigger name="delete_role_{{$r->id}}">
+                                        <flux:button size="xs" icon="trash" variant="ghost" class="cursor-pointer"/>
+                                    </flux:modal.trigger>
+                                    <flux:modal name="delete_role_{{$r->id}}" variant="bare" class="md:w-1/3">
+                                        <x-modal-base title="Delete User Role: {{str($r->name)->headline()}}">
+                                            <p>Are you sure you want to delete this user role? <strong>This cannot be undone.</strong></p>
+                                            @if($r->users_count)
+                                                <p class="text-red-800">There are {{$r->users_count}} {{str('user')->plural($r->users_count)}} that currently have this role assigned. Deleting this role will affect their ability to use the application. It's advised to remove this role from users before deleting it.</p>
+                                            @endif
+                                            <x-slot name="action">
+                                                <flux:button variant="primary" wire:click="removeRole('{{$r->id}}')" color="red" size="sm">Delete Role</flux:button>
+                                            </x-slot>
+                                        </x-modal-base>
+                                    </flux:modal>
+                                @endcanOrSuper
+                            </div>
+
                         </flux:table.cell>
                     </flux:table.row>
                 @endforeach
