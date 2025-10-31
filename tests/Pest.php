@@ -11,9 +11,28 @@
 |
 */
 
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
+
+uses()->beforeEach(function () {
+    $this->seed(\Database\Seeders\RoleSeeder::class);
+})->in('Feature');
+
+function createRoleWithPermissions(string $permission): Role
+{
+    return Role::create(['name' => str()->random(10)])->givePermissionTo($permission);
+}
+
+function userWithPermission($permission): User
+{
+    $role = createRoleWithPermissions($permission);
+
+    return User::factory()->create()->assignRole($role);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +59,3 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
-function something()
-{
-    // ..
-}

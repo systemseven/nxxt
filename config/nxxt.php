@@ -7,7 +7,7 @@ return [
         ['key' => 'items', 'set' => ['view', 'create', 'edit', 'delete']],
         ['key' => 'communities', 'set' => ['view', 'create', 'edit', 'delete']],
         ['key' => 'users', 'set' => ['view', 'create', 'edit', 'delete']],
-        ['key' => 'users_roles', 'set' => ['view', 'create', 'edit', 'delete']],
+        ['key' => 'user_roles', 'set' => ['view', 'create', 'edit', 'delete']],
         ['key' => 'reports', 'set' => ['view']],
         ['key' => 'scheduling', 'set' => ['view', 'create', 'edit', 'delete']],
     ],

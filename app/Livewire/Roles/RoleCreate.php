@@ -7,7 +7,6 @@ use Flux\Flux;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 #[Title('Create User Role')]
@@ -21,9 +20,6 @@ class RoleCreate extends Component
 
         try {
             DB::transaction(function () {
-                foreach ($this->form->permissions as $p) {
-                    Permission::create(['name' => $p]);
-                }
                 Role::create(['name' => str($this->form->name)->slug('_')])
                     ->givePermissionTo($this->form->permissions);
             });

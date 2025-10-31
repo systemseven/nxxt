@@ -7,20 +7,24 @@
     />
 
     @unless($this->roles->isEmpty())
-        <flux:table class="border">
+        <flux:table>
             <flux:table.rows>
                 <flux:table.columns>
                     <flux:table.column class="!pl-2">Role Name</flux:table.column>
-                    <flux:table.column>Permissions on Role</flux:table.column>
-                    <flux:table.column>Users with Role</flux:table.column>
+                    <flux:table.column align="center">Permissions on Role</flux:table.column>
+                    <flux:table.column align="center">Users with Role</flux:table.column>
                     <flux:table.column>Last Updated</flux:table.column>
                     <flux:table.column>Actions</flux:table.column>
                 </flux:table.columns>
                 @foreach($this->roles as $r)
-                    <flux:table.row class="even:bg-slate-50">
-                        <flux:table.cell class="!pl-2">{{str($r->name)->headline()}}</flux:table.cell>
-                        <flux:table.cell>{{$r->permissions_count}}</flux:table.cell>
-                        <flux:table.cell>{{$r->users_count}}</flux:table.cell>
+                    <flux:table.row>
+                        <flux:table.cell class="!pl-2">
+                            <a href="" class="hover:underline">
+                                {{str($r->name)->headline()}}
+                            </a>
+                        </flux:table.cell>
+                        <flux:table.cell align="center">{{$r->permissions_count}}</flux:table.cell>
+                        <flux:table.cell align="center">{{$r->users_count}}</flux:table.cell>
                         <flux:table.cell>
                             {{ $r->updated_at->timezone('America/New_York')->diffInHours(now()) > 24
                                 ? $r->updated_at->timezone('America/New_York')->format('M j, Y g:i A')

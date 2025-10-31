@@ -7,6 +7,7 @@
          <x-slot name="right">
              --first name--
              --last name--
+             --role--
              --email--
              <x-active-disabled-dropdown />
          </x-slot>

@@ -15,6 +15,7 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// /https://spatie.be/docs/laravel-permission/v6/basic-usage/middleware
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
     Route::get('settings/profile', Profile::class)->name('profile.edit');
@@ -25,8 +26,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users', UserList::class)->name('users.index');
         Route::get('users/create', UserCreate::class)->name('users.create');
 
-        Route::get('roles', RoleList::class)->name('roles.index');
-        Route::get('roles/create', RoleCreate::class)->name('roles.create');
+        Route::get('roles', RoleList::class)->middleware(['role_or_permission:super_admin|view:user_roles'])->name('roles.index');
+        Route::get('roles/create', RoleCreate::class)->middleware(['role_or_permission:super_admin|create:user_roles'])->name('roles.create');
     });
 
 });

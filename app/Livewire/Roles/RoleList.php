@@ -13,6 +13,6 @@ class RoleList extends Component
     #[Computed]
     public function roles()
     {
-        return Role::orderBy('name')->withCount(['permissions', 'users'])->get();
+        return Role::orderBy('name')->where('name', '!=', 'super_admin')->withCount(['permissions', 'users'])->get();
     }
 }
