@@ -13,12 +13,13 @@ class UserCreate extends Component
 {
     public UserForm $form;
 
-    //TODO: this may be repeated across the userupdate - worth extracting?
+    // TODO: this may be repeated across the userupdate - worth extracting?
     #[Computed]
     public function roles()
     {
         return Role::orderBy('name')->get();
     }
+
     public function save()
     {
         $this->validate();

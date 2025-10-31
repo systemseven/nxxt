@@ -24,8 +24,8 @@ Route::middleware(['auth'])->group(function () {
     //    Route::get('settings/appearance', Appearance::class)->name('appearance.edit');
 
     Route::prefix('settings')->group(function () {
-        Route::get('users', UserList::class)->name('users.index');
-        Route::get('users/create', UserCreate::class)->name('users.create');
+        Route::get('users', UserList::class)->middleware(['role_or_permission:super_admin|view:users'])->name('users.index');
+        Route::get('users/create', UserCreate::class)->middleware(['role_or_permission:super_admin|create:users'])->name('users.create');
 
         Route::get('roles', RoleList::class)->middleware(['role_or_permission:super_admin|view:user_roles'])->name('roles.index');
         Route::get('roles/create', RoleCreate::class)->middleware(['role_or_permission:super_admin|create:user_roles'])->name('roles.create');
