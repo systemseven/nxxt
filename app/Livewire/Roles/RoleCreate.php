@@ -21,8 +21,10 @@ class RoleCreate extends Component
 
         try {
             DB::transaction(function () {
-                Role::create(['name' => str($this->form->name)->slug('_')])
+                $role = Role::create(['name' => str($this->form->name)->slug('_')])
                     ->givePermissionTo($this->form->permissions);
+
+                activity()->performedOn($role)->log('Created a new User Role');
             });
             Flux::toast(text: 'Role has been successfully created', heading: 'Role Created!', variant: 'success');
         } catch (\Throwable $e) {

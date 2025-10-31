@@ -36,7 +36,7 @@ class RoleUpdate extends Component
                 $this->role->name = str($this->form->name)->slug('_');
                 $this->role->save();
                 $this->role->syncPermissions($this->form->permissions);
-
+                activity()->performedOn($this->role)->log('Updated a User Role');
             });
             Flux::toast(text: 'Role has been successfully updated', heading: 'Role Updated!', variant: 'success');
         } catch (\Throwable $e) {
