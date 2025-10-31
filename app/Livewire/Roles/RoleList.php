@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Roles;
 
+use Flux\Flux;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -18,8 +19,10 @@ class RoleList extends Component
 
     public function removeRole($role_id)
     {
-        // delete from the role table
-        // delete from the permission_role table
-        dd('its morphin time...err deleting time...');
+        Role::where('id', $role_id)->delete();
+        activity()
+            ->log('Deleted a User Role');
+        Flux::modal(sprintf('delete_%s', $role_id))->close();
+        Flux::toast(text: 'Role has been successfully deleted', heading: 'Role Deleted', variant: 'danger');
     }
 }

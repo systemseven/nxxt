@@ -36,10 +36,10 @@
                                     <flux:button size="xs" variant="ghost" icon="pencil-square" :href="route('roles.edit', $r)" />
                                 @endcanOrSuper
                                 @canOrSuper('delete:user_roles')
-                                    <flux:modal.trigger name="delete_role_{{$r->id}}">
+                                    <flux:modal.trigger name="delete_{{$r->id}}">
                                         <flux:button size="xs" icon="trash" variant="ghost" class="cursor-pointer"/>
                                     </flux:modal.trigger>
-                                    <flux:modal name="delete_role_{{$r->id}}" variant="bare" class="md:w-1/3">
+                                    <flux:modal name="delete_{{$r->id}}" variant="bare" class="md:w-1/3">
                                         <x-modal-base title="Delete User Role: {{str($r->name)->headline()}}">
                                             <p>Are you sure you want to delete this user role? <strong>This cannot be undone.</strong></p>
                                             @if($r->users_count)
