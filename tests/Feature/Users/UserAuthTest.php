@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 
 test('user pages require permission', function ($route) {
     $user = User::factory()->create();
@@ -10,7 +9,7 @@ test('user pages require permission', function ($route) {
 })->with([
     'users.index',
     'users.create',
-//    'users.edit',
+    //    'users.edit',
 ]);
 
 test('user pages can be accessed', function ($route, $permission) {
@@ -20,7 +19,7 @@ test('user pages can be accessed', function ($route, $permission) {
 })->with([
     ['users.index', 'view:users'],
     ['users.create', 'create:users'],
-//    ['users.edit', 'edit:users'],
+    //    ['users.edit', 'edit:users'],
 ]);
 
 test('super admin can access user pages', function ($route) {
@@ -30,5 +29,5 @@ test('super admin can access user pages', function ($route) {
 })->with([
     'users.index',
     'users.create',
-//    'users.edit',
+    //    'users.edit',
 ]);
