@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('roles', RoleList::class)->middleware(['role_or_permission:super_admin|view:user_roles'])->name('roles.index');
         Route::get('roles/create', RoleCreate::class)->middleware(['role_or_permission:super_admin|create:user_roles'])->name('roles.create');
-        Route::get('roles/{role}/edit', RoleUpdate::class)->middleware(['role_or_permission:super_admin|update:user_roles'])->name('roles.edit');
+        Route::get('roles/{role}/edit', RoleUpdate::class)->middleware(['role_or_permission:super_admin|edit:user_roles'])->name('roles.edit');
     });
 
 });
