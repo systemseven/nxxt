@@ -2,6 +2,7 @@
 
 use App\Livewire\Roles\RoleCreate;
 use App\Livewire\Roles\RoleList;
+use App\Livewire\Roles\RoleUpdate;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -28,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('roles', RoleList::class)->middleware(['role_or_permission:super_admin|view:user_roles'])->name('roles.index');
         Route::get('roles/create', RoleCreate::class)->middleware(['role_or_permission:super_admin|create:user_roles'])->name('roles.create');
+        Route::get('roles/{role}/edit', RoleUpdate::class)->middleware(['role_or_permission:super_admin|update:user_roles'])->name('roles.edit');
     });
 
 });

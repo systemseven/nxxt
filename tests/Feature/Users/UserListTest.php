@@ -1,6 +1,6 @@
 <?php
 
-//rename this to user auth test and do the same thing you did with roles...
+// rename this to user auth test and do the same thing you did with roles...
 test('example', function () {
     $response = $this->get('/');
 

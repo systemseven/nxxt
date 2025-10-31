@@ -5,6 +5,7 @@ namespace App\Livewire\Roles;
 use App\Livewire\Forms\RoleForm;
 use Flux\Flux;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
@@ -25,6 +26,7 @@ class RoleCreate extends Component
             });
             Flux::toast(text: 'Role has been successfully created', heading: 'Role Created!', variant: 'success');
         } catch (\Throwable $e) {
+            Log::error(sprintf('[RoleCreate] %s', $e->getMessage()));
             Flux::toast(text: 'Your changes have not been saved', heading: 'Something went wrong', variant: 'danger');
         }
 

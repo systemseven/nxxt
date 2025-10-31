@@ -19,7 +19,7 @@
                 @foreach($this->roles as $r)
                     <flux:table.row>
                         <flux:table.cell class="!pl-2">
-                            <a href="" class="hover:underline">
+                            <a href="{{route('roles.edit', $r)}}" class="hover:underline">
                                 {{str($r->name)->headline()}}
                             </a>
                         </flux:table.cell>

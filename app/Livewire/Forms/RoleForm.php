@@ -2,16 +2,39 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Spatie\Permission\Models\Role;
 
 class RoleForm extends Form
 {
-    #[Validate('required|unique:roles,name')]
+    public $id;
+
     public $name;
 
-    #[Validate('required|array|min:1')]
     public $permissions;
+
+    public function rules()
+    {
+        $slug = str($this->name)->slug('_');
+
+        return [
+            'name' => [
+                'required',
+                function ($attribute, $value, $fail) use ($slug) {
+                    $query = Role::where('name', $slug);
+
+                    if ($this->id) {
+                        $query->where('id', '!=', $this->id);
+                    }
+
+                    if ($query->exists()) {
+                        $fail('A Role with this name already exists.');
+                    }
+                },
+            ],
+            'permissions' => 'required|array|min:1',
+        ];
+    }
 
     public function messages()
     {
