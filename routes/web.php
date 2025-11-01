@@ -9,7 +9,7 @@ use App\Livewire\Users\UserCreate;
 use App\Livewire\Users\UserList;
 use Illuminate\Support\Facades\Route;
 
-if(!app()->environment('production')) {
+if (! app()->environment('production')) {
     Route::get('/notification', function () {
         $user = \App\Models\User::first();
 
@@ -23,6 +23,10 @@ Route::redirect('/', 'dashboard')->name('home');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('set-password/{user}', function () {
+    dd('#todo');
+})->name('auth.set-password');
 
 // /https://spatie.be/docs/laravel-permission/v6/basic-usage/middleware
 Route::middleware(['auth'])->group(function () {

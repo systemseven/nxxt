@@ -13,6 +13,7 @@ class UserAccountCreated extends Notification
     use Queueable;
 
     public User $user;
+
     /**
      * Create a new notification instance.
      */
@@ -36,7 +37,8 @@ class UserAccountCreated extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = URL::signedRoute('login', ['user' => $this->user]);
+        $url = URL::signedRoute('auth.set-password', ['user' => $this->user]);
+
         return (new MailMessage)
             ->subject('Your account has been created')
             ->markdown('emails.user-account-created', ['url' => $url, 'user' => $this->user]);

@@ -3,19 +3,14 @@
 
 You have a new [{{ config('app.name') }}]({{$url}}) account created.
 
-To get started you'll need to create your password.
+To get started you'll need to set your password and login.
 
 <x-mail::button :url="$url">
-    Create Your Password
+    Set Your Password
 </x-mail::button>
 
-Regards,<br>
-The {{ config('app.name') }} Team
 
 <hr/>
 
-<small>If you're having trouble clicking the "Create Your Password" button, copy and paste the URL below into your web browser: [{{$url}}]({{$url}})</small>
-
-
-
+<small>If you're having trouble clicking the "Set Your Password" button, copy and paste the URL below into your web browser: [{{$url}}]({{$url}})</small>
 </x-mail::message>
