@@ -2,14 +2,17 @@
      <x-page-header heading="Manage Users" subheading="Manage Users that have access to the application. This is for both first-party and third-party application users" action="Add New User" :url="route('users.create')"/>
      <x-page-actions>
          <x-slot name="left">
-             <flux:button>Export Users</flux:button>
+             <flux:button :href="route('dashboard') .'?'. urldecode(http_build_query(['filters' => $this->filters]))">Export Users</flux:button>
          </x-slot>
          <x-slot name="right">
-             --first name--
-             --last name--
-             --role--
-             --email--
-             <x-active-disabled-dropdown />
+             <div class="flex items-center space-x-2">
+                 <x-filters.text wire:model.live.debounce.200ms="filters.first_name" placeholder="First Name" />
+                 <x-filters.text wire:model.live.debounce.200ms="filters.last_name" placeholder="Last Name" />
+                 <x-filters.listbox wire:model.live="filters.email" placeholder="Email" :options="$this->emails" />
+                 <x-filters.listbox wire:model.live="filters.role" placeholder="Role" :options="$this->roles" />
+                 <x-filters.active-disabled wire:model.live="filters.active" />
+                 <flux:button wire:click="resetFilters" variant="ghost" >Reset</flux:button>
+             </div>
          </x-slot>
      </x-page-actions>
 
@@ -17,10 +20,10 @@
         <flux:table :paginate="$this->users">
             <flux:table.columns>
                 <flux:table.column>Active</flux:table.column>
-                <flux:table.column>Role</flux:table.column>
                 <flux:table.column>First Name</flux:table.column>
                 <flux:table.column>Last Name</flux:table.column>
                 <flux:table.column>Email</flux:table.column>
+                <flux:table.column>Role</flux:table.column>
                 <flux:table.column>Last Login</flux:table.column>
                 <flux:table.column></flux:table.column>
             </flux:table.columns>
@@ -30,12 +33,12 @@
                         <flux:table.cell>
                             <x-active-badge :active="$u->active" />
                         </flux:table.cell>
-                        <flux:table.cell>
-                            <x-role-badge :roles="$u->roles" />
-                        </flux:table.cell>
                         <flux:table.cell>{{$u->first_name}}</flux:table.cell>
                         <flux:table.cell>{{$u->last_name}}</flux:table.cell>
                         <flux:table.cell>{{$u->email}}</flux:table.cell>
+                        <flux:table.cell>
+                            <x-role-badge :roles="$u->roles" />
+                        </flux:table.cell>
                         <flux:table.cell>{{$u->last_login_at ? human_or_datetime($u->last_login_at) : '-'}}</flux:table.cell>
                         <flux:table.cell>
                             @canOrSuper('edit:users')
