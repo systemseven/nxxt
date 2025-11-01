@@ -3,12 +3,20 @@
 use App\Livewire\Roles\RoleCreate;
 use App\Livewire\Roles\RoleList;
 use App\Livewire\Roles\RoleUpdate;
-use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Users\UserCreate;
 use App\Livewire\Users\UserList;
 use Illuminate\Support\Facades\Route;
+
+if(!app()->environment('production')) {
+    Route::get('/notification', function () {
+        $user = \App\Models\User::first();
+
+        return (new \App\Notifications\UserAccountCreated($user))
+            ->toMail($user);
+    });
+}
 
 Route::redirect('/', 'dashboard')->name('home');
 

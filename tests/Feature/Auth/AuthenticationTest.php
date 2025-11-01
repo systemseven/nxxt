@@ -8,6 +8,8 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
+test('inactive users cannot login', function () {})->skip();
+
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->withoutTwoFactor()->create();
 

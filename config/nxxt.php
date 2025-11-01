@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'system_emails' => [
+        'email_key_ie_purchase_order_created' => [
+            'subject' => 'Purchase Order Created',
+            'to' => [],
+            'bcc' => [],
+            'cc' => [],
+        ],
+    ],
+
     'permissions' => [
         ['key' => 'builders', 'set' => ['view', 'create', 'edit', 'delete']],
         ['key' => 'vendors', 'set' => ['view', 'create', 'edit', 'delete']],

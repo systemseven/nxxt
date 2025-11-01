@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Users;
 
+use App\Actions\Users\CreateUser;
 use App\Livewire\Forms\Users\UserForm;
+use Flux\Flux;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -23,7 +25,10 @@ class UserCreate extends Component
     public function save()
     {
         $this->validate();
+        CreateUser::execute($this->form->toArray());
 
-        dd($this->form);
+        Flux::toast(text: 'User has been successfully created', heading: 'User Created!', variant: 'success');
+
+        $this->redirectRoute('users.index', navigate: true);
     }
 }

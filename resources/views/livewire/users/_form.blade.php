@@ -17,11 +17,12 @@
     </x-form-section>
 
     <x-form-section heading="Permissions" subheading="Assigning a role will control the features that this user can access. This will also control what items they see in the navigation bar.">
-        <flux:select variant="listbox" searchable placeholder="Assign Role" class="max-w-sm">
+        <flux:select variant="listbox" searchable placeholder="Assign Role" class="max-w-sm" wire:model="form.role_id">
             @foreach($this->roles as $r)
                 <flux:select.option value="{{$r->id}}">{{str($r->name)->headline()}}</flux:select.option>
             @endforeach
         </flux:select>
+        <flux:error name="form.role_id" />
     </x-form-section>
 
     <x-form-section>
