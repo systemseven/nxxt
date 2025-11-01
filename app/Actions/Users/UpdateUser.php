@@ -19,5 +19,6 @@ class UpdateUser
 
         $user->syncRoles($role_id);
 
+        activity()->on($user)->log('Updated User Account');
     }
 }
