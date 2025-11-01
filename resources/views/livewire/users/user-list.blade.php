@@ -41,22 +41,31 @@
                         </flux:table.cell>
                         <flux:table.cell>{{$u->last_login_at ? human_or_datetime($u->last_login_at) : '-'}}</flux:table.cell>
                         <flux:table.cell>
-                            @canOrSuper('edit:users')
-                                <flux:button size="xs" variant="ghost" icon="pencil-square" :href="route('users.edit', $u)"/>
-                            @endcanOrSuper
-                            @canOrSuper('delete:users')
-                                <flux:modal.trigger name="delete_{{$u->id}}">
-                                    <flux:button size="xs" icon="trash" variant="ghost" class="cursor-pointer"/>
-                                </flux:modal.trigger>
-                                <flux:modal name="delete_{{$u->id}}" variant="bare" class="md:w-1/3">
-                                    <x-modal-base title="Delete User Role: {{str($u->name)->headline()}}">
-                                        <p>Are you sure you want to delete this user role? <strong>This cannot be undone.</strong></p>
-                                        <x-slot name="action">
-                                            <flux:button variant="primary" wire:click="removeRole('{{$u->id}}')" color="red" size="sm">Delete Role</flux:button>
-                                        </x-slot>
-                                    </x-modal-base>
-                                </flux:modal>
-                            @endcanOrSuper
+                            @if($u->active)
+                                @canOrSuper('edit:users')
+                                    <flux:button size="xs" variant="ghost" icon="pencil-square" :href="route('users.edit', $u)"/>
+                                @endcanOrSuper
+                                @canOrSuper('delete:users')
+                                    <flux:modal.trigger name="delete_{{$u->id}}">
+                                        <flux:button size="xs" icon="trash" variant="ghost" class="cursor-pointer"/>
+                                    </flux:modal.trigger>
+                                    <flux:modal name="delete_{{$u->id}}" variant="bare" class="md:w-1/3">
+                                        <x-modal-base title="Delete User Role: {{str($u->name)->headline()}}">
+                                            <p>Are you sure you want to deactivate this user?</p>
+                                            <p class="text-red-800">{{$u->first_name}} will no longer be able to use the application.</p>
+                                            <p>All historical data will remain in place. This user can be reactivated at any time.</p>
+                                            <x-slot name="action">
+                                                <flux:button variant="primary" wire:click="toggleActive('{{$u->id}}')" color="red" size="sm">Delete Role</flux:button>
+                                            </x-slot>
+                                        </x-modal-base>
+                                    </flux:modal>
+                                @endcanOrSuper
+                            @else
+                                <div class="flex justify-end space-x-2">
+                                    <flux:badge color="rose" size="sm">Disabled: {{$u->deleted_at?->format('M j, Y g:i A')}}</flux:badge>
+                                    <flux:button size="sm" wire:click="toggleActive('{{$u->id}}')">Restore Access</flux:button>
+                                </div>
+                            @endif
                         </flux:table.cell>
                     </flux:table.row>
                 @endforeach

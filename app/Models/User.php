@@ -58,6 +58,7 @@ class User extends Authenticatable
             'require_mfa' => 'boolean',
             'created_at' => TimezoneCast::class,
             'updated_at' => TimezoneCast::class,
+            'deleted_at' => TimezoneCast::class,
             'last_login_at' => TimezoneCast::class,
         ];
     }

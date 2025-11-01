@@ -3,6 +3,7 @@
 namespace App\Livewire\Users;
 
 use App\Models\User;
+use Flux\Flux;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
@@ -43,6 +44,21 @@ class UserList extends Component
         return Role::orderBy('name')->pluck('name')->mapWithKeys(function ($name) {
             return [$name => str($name)->headline()->toString()];
         });
+    }
+
+    public function toggleActive($id)
+    {
+        $user = User::find($id);
+        $user->active = ! $user->active;
+
+        if (! $user->active) {
+            $user->deleted_at = now();
+        }
+
+        $user->save();
+        $msg = sprintf('%s has been successfully %s', $user->name, $user->active ? 'activated' : 'deactivated');
+        Flux::modal(sprintf('delete_%s', $id))->close();
+        Flux::toast(text: $msg, heading: 'User Updated!', variant: 'danger');
     }
 
     #[Computed]
