@@ -4,6 +4,7 @@ namespace App\Actions\Users;
 
 use App\Models\User;
 use App\Notifications\UserAccountCreated;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUser
 {
@@ -12,8 +13,10 @@ class CreateUser
      */
     public static function execute($payload)
     {
-        $role_id = $payload['role_id'];
+        $role_id = html_entity_decode($payload['role_id']);
         unset($payload['role_id']);
+
+        $payload['password'] = Hash::make(str()->random(16));
 
         $user = User::create($payload);
         $user->syncRoles($role_id);
