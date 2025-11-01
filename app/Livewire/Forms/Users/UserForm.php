@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Forms\Users;
 
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class UserForm extends Form
 {
+    public $id;
+
     public $first_name;
 
     public $last_name;
@@ -23,7 +26,11 @@ class UserForm extends Form
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($this->id),
+            ],
             'role_id' => 'required',
         ];
     }

@@ -7,16 +7,17 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Users\UserCreate;
 use App\Livewire\Users\UserList;
+use App\Livewire\Users\UserUpdate;
 use Illuminate\Support\Facades\Route;
 
-if (! app()->environment('production')) {
-    Route::get('/notification', function () {
-        $user = \App\Models\User::first();
-
-        return (new \App\Notifications\UserAccountCreated($user))
-            ->toMail($user);
-    });
-}
+// if (! app()->environment('production')) {
+//    Route::get('/notification', function () {
+//        $user = \App\Models\User::first();
+//
+//        return (new \App\Notifications\UserAccountCreated($user))
+//            ->toMail($user);
+//    });
+// }
 
 Route::redirect('/', 'dashboard')->name('home');
 
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('settings')->group(function () {
         Route::get('users', UserList::class)->middleware(['role_or_permission:super_admin|view:users'])->name('users.index');
         Route::get('users/create', UserCreate::class)->middleware(['role_or_permission:super_admin|create:users'])->name('users.create');
+        Route::get('users/{user}/edit', UserUpdate::class)->middleware(['role_or_permission:super_admin|edit:users'])->name('users.edit');
 
         Route::get('roles', RoleList::class)->middleware(['role_or_permission:super_admin|view:user_roles'])->name('roles.index');
         Route::get('roles/create', RoleCreate::class)->middleware(['role_or_permission:super_admin|create:user_roles'])->name('roles.create');

@@ -54,6 +54,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'active' => 'boolean',
+            'require_mfa' => 'boolean',
             'created_at' => TimezoneCast::class,
             'updated_at' => TimezoneCast::class,
             'last_login_at' => TimezoneCast::class,
