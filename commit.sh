@@ -13,7 +13,7 @@ fi
 MESSAGE="$1"
 
 echo "Running Pint..."
-./vendor/bin/pint
+./vendor/bin/pint --dirty
 
 echo "Adding files..."
 git add .
